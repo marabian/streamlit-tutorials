@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Streamlit specific
+.streamlit/
+
+# Python virtual environments
+.env
+.venv
+venv/
+ENV/
+
+# Editor directories and files
+.vscode/
+*.swp
+*.swo
+.idea/
+*.sublime-workspace
+
+# Log files
+*.log
+
