@@ -1,0 +1,4 @@
+streamlit==1.33.0
+watchdog==4.0.0
+openpyxl==3.1.2
+duckdb==0.10.1
