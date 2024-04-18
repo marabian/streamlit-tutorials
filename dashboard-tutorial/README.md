@@ -1,3 +1,3 @@
 # Streamlit Dashboard Tutorial
 
-Basic *streamlit* tutorial for building dashboards using *pandas* and *plotly*.
+Basic *Streamlit* tutorial for building dashboards using *Pandas* and *Plotly*.
