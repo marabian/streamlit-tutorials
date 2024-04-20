@@ -1,0 +1,25 @@
+# Streamlit's Next Biggest Changes
+
+1. **Multiple [`st.chat_input()`](https://docs.streamlit.io/develop/api-reference/chat/st.chat_input) widgets**
+    - Problem:  
+    - Use **layout containers** like `st.container()`, `st.sidebar()`, `stabs()`, `st.expander`, or `st.empty` (empty placeholder), they stick to order and location they were called into. Coming with v1.31.
+
+2. `st.write_stream()` - Streaming answer where tokens appear every few seconds. Takes as input an *OpenAI* stream, or a *LangChain* stream, or a generator function that spits token at every call. Cousin to `st.write()`, meaning accepts markdown/Pillow images/Plotly figures/any data input just like `st.write()`. Coming with v1.31.
+
+3. Display subtitles live over video using *srt/vtt* subtitle files. Pass as argument to `st.video()` widget. Came even pass a dictionary of languages. Coming with v1.32.
+
+4. `st.popover()` - a new multielement component that opens just like an expander. Can fill it with widgets (using `with`), can also store a popover into a variable and call widgets on it. Still behaves like a layout component, you won't nest a popover inside a popover. But they can go into other layout elements like sidebar, tabs, expanders. Also fits more complex wigets like dataframes, columns, or charts. Opening and closing won't cause reruns, every widget interaction in the popover will trigger a full rerun. Can work around this using `st.form()`. Anything inside `st.form()` won't trigger a full rerun, only clicking on the form submit button will trigger a ful rerun. From v1.29, can now hide border from a form using the `border=False` parameter. Looks better now!
+
+5. `st.dialogue()` - Function decorator just like `st.cache()`. Closely follows the cache API, just in an inverse way. Creating a function with `st.dialogue()` will kind of create an embedded streamlit app in a dialogue window. This dialogue app will rerun the function at every widget interaction, without ever rerunning the full app, until it's closed. First time streamlit enables you to rerun part of the code without rerunning the whole app. So if you decorate your function with streamlit widgets using `@st.experimental_fragment` (or something), this function becomes its own streamlit container. Any interaction of a widget within this function will only rerun this function and not the full app. Just like for the dialogue window. Will enable a lot of new use cases like a streaming plots or dynamic forms (you select country it updates form to select states if selected USA for example...).
+
+6. Displaying new pages to authenticated users. With v1.31 can hide automatically created nav menu by setting the `--client.showSidebarNavigation false` parameter when running `streamlit run app.py`. But then how do we navigate to pages? Execute `st.page_link()` (e.g. in an expander), with the path set to a file in the pages folder or an external URL, a new navigation menu item will appear in the app, can click on it to browse/go to the given page in the app. `st.page_link()` also has arguments for the display label and icon, so no more emojis in the filenames!! Allows you to hide multiple pages from unauthenticated users, with an if-clause. Just do `if.st.session_state['authenticated]` and call the `st.page_links()`you want authenticated users to see.
+
+7. `st.switch_page()` - programatically browse to a new page with streamlit 1.30. Completely remove every page navigation from the app and just push the user to differnet pages yourself, depending on the context of the situation. For exmaple can have an if `st.button()` widget, when pressed we navigate to a new page using `st.switch_page()` and passing the `pages/secret.py` (e.g.). (for paywalled content).
+
+8. **Query parameters with pages**. If you include query params in the URL (e.g. `/?items=10%fruit=apple`), then changed pages thru switch page or page link, those query params wont be propagated to the new URl anymore. Why cares? In v1.30, query params in the URL can be retrieved as a dictionary using the new experimentalized `st.query_params` methods. E.g. can initialize widgets with values stored inside that URL (e.g. `?animal=dog` to init the animals page widgets to dog mode).
+
+9. `st.container()` takes height, if put too many widgets in the container such that it becomes longer than the fixed height, it becomes longer than the fixed height, will display a scrollbar. Greatly benefits apps with grid look feeling.
+
+10. Dataframe and data editor have updated the tool bar for easier searching and data downloading.
+
+11. How do you write a unit test for your app, for users that authenticate for a popover window have access to more navigation menu items. New headless testing framework: **app testing**, runs user code directly, simulates user input like interacting with popovers/text widgets, then analyzes the outputs. Streamlit has a [video](https://www.youtube.com/watch?v=99OEoP5sy0U) about it, watch to learn about **unit testing** streamlit apps.

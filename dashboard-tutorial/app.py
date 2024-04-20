@@ -200,7 +200,7 @@ def plot_bottom_right():
         ["Account", "Year"] + all_months
     ].assign(**abs_columns).melt(
         id_vars=["Account", "Year"],
-        var_name="year",  # This appears to be a mistake in naming in your original code; it should be "month" ideally
+        var_name="month",  # This appears to be a mistake in naming in your original code; it should be "month" ideally
         value_name="sales"
     )
     # fmt: on
