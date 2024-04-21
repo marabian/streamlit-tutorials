@@ -164,6 +164,7 @@ def plot_top_right():
     st.plotly_chart(fig, use_container_width=True)
 
 
+# Plot a line chart of monthly budget vs forecast for 2023 sales in the software business unit
 @st.cache_data
 def plot_bottom_left():
     sales_data = df.loc[
@@ -174,6 +175,9 @@ def plot_bottom_left():
         var_name="month",
         value_name="sales",
     )
+
+    # display the dataframe - useful to see what we're plotting
+    st.dataframe(sales_data)
 
     fig = px.line(
         sales_data,
@@ -271,51 +275,3 @@ with bottom_right_column:
     plot_bottom_right()
 
 # fmt: on
-
-# SOFTWARE SALES FOR 2023 (WIDE)
-# ------------------------------
-# df_software_wide = df.loc[
-#     (df["Year"] == 2023) & (df["Account"] == "Sales") & (df["business_unit"] == "Software"),
-#     ["Scenario"] + all_months,
-# ]
-# # fmt: off
-# with st.expander("Software Sales for 2023 (Wide)"):
-#     st.dataframe(
-#         df_software_wide,
-#         column_config={
-#             "Year": st.column_config.NumberColumn(format="%d")
-#         },
-#     )
-# # fmt: on
-
-
-# Select Software sales for 2023 (LONG)
-# -------------------------------------
-# df_software_long = df.loc[
-#     (df["Year"] == 2023) & (df["Account"] == "Sales") & (df["business_unit"] == "Software"),
-#     ["Scenario"] + all_months,
-# ].melt(
-#     id_vars=["Scenario"],
-#     var_name="month",
-#     value_name="sales",
-# )
-# # fmt: off
-# with st.expander("Software Sales for 2023 (Long)"):
-#     st.dataframe(
-#         df_software_long,
-#         column_config={
-#             "Year": st.column_config.NumberColumn(format="%d")
-#         },
-#     )
-# # fmt: on
-
-
-# # fmt: off
-# with st.expander("Data Preview"):
-#     st.dataframe(
-#         df,
-#         column_config={
-#             "Year": st.column_config.NumberColumn(format="%d")
-#         },
-#     )
-# # fmt: on
