@@ -12,7 +12,7 @@
 7. Partial reruns - `st.fragment()` decorator, useful to rerun parts of your app, like plots.
 8. Displaying certain pages to authenticated users - `--client.showSidebarNavigation false` flag and `st.page_link` widget
 9. Can browse to new page yourself using `st.switch_page` method (hide the navbar firsts, then add buttons in the UI to navigate to different pages).
-10. Catch query parameter from URL as dictionary, useful to initialize settings - `st.query_params`
+10. Catch query parameter from URL as dictionary, useful to initialize settings - `st.query_params`. Can also set query params in the URL using `st.set_query_params` to copy/send to colleagues.
 11. Height parameter for `st.container()` to fix the height of the container - `st.container(height=200)`
 12. Dataframe and data editor have updated the tool bar for easier searching and data downloading
 13. Unit tests for your app, simulates user input workflows - [App Testing](https://docs.streamlit.io/develop/api-reference/app-testing)
@@ -41,6 +41,58 @@
 36. Streamlit Creators Program - VIP team of people who made big contributions to the community. Other ways to contribute include becoming a streamlit advocate by regularly producing content, student ambassador, streamlit moderator to help maintain forum/discord server.
 37. Streamlit Hackathon - AssemblyAI for auto transcriptions, LangChain/Llama Index for chatbot orchestration, Weaviate for vector database, Clarifai for gen AI in the cloud. Each of these has a specific Streamlit tutorial integration!
 38. `st.rerun()` method to rerun the app. Useful for advanced use cases like when you need to rerun an app for each micro-batch of new data for pseudo real-time data processing. Use sparingly, read more about it [here](https://docs.streamlit.io/develop/api-reference/execution-flow/st.rerun) (when to use vs when not to use)
+
+39. Add anchor argument for quickly navigating through your app by changing the url - `st.title("Example :tada", anchor="title")` for `localhost:8501/#title`
+
+40. Emoji and LaTeX formatting in `st.markdown()` - `:tada:` and `$$` for inline math and `$$$` for block math.
+
+41. Custom CSS in `st.markdown()` using `unsafe_allow_html=True` argument.
+
+42. Captions for footnotes (smaller, greyed out text) - `st.caption`
+
+43. Map support for displaying geo-locations (need to provide dt of longitude/latitude) - `st.map()`
+
+44. Add rows to dataframe and chart elements - `my_table.add_rows(df)`
+
+45. Secret management in Streamlit - [Read here](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management)
+
+46. Media elements - `st.image`, `st.video`, `st.audio`
+
+47. Input elements - `st.number_input`, `st.date_inGut`
+
+48. Select box - poor man's multipage app
+
+49. Number input - dedicated widget for numbers (`st.number_input`)
+
+50. Date input - dedicated widget for dates (`st.date_input`)
+
+51. File uploader - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
+
+52. Download button for files - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
+
+53. Session state - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
+
+54. `st.empty` - empty placeholder for layout purposes
+
+55. Nicer looking components with `hydralit_components`
+
+56. Set page config using `st.set_page_config`
+
+57. `st.exception(e)` - for exception handling in Streamlit apps
+
+58. `st.info`, `st.success`, `st.warning`, `st.error` for different types of alert messages
+
+59. `st.spinner` to show loader while a function is running (works inside any context manager).
+
+60. Progress bar, useful for showing progress of a long running process, can update any point in app - `st.progress`
+
+61. stop app using `st.stop()` - useful for stopping app if user did not complete a form/condition not met.
+
+62. Rerun app using `st.rerun` - advanced situations to reload data periodically, simulating real-time data.
+
+63. Echo with `st.echo` - prints the code and output to app
+
+64. `st.help` - displays help text for a function
 
 ## Features
 
@@ -535,3 +587,98 @@
 
         container.header(st.session_state.value)
         ```
+
+39. Add anchor argument for quickly navigating through your app by changing the url
+    - Example here
+
+        ```python
+        # navigate to localhost:8501/#title
+        st.title("Example :tada:", anchor="title")
+        st.write("...")
+        ```
+
+40. `st.markdown()` supports emojis with `:tada:` and LaTeX formatting using `$$` for inline math and `$$$` for block math.
+
+41. `st.markdown` accepts a `unsafe_allow_html=True` HTML argument which you can use to color your text...or use the CSS hack.
+
+42. `st.caption` for putting small text, like footnotes (greyed out, smaller text).
+
+43. `st.map()` - takes in a dataframe of geo-locations to display/map with scatter plot, with each point corresponding to a latitude/longitude pair. Actually displays a world map with city markers.
+
+44. Dataframe and chart (plot) elements accept an `add_rows` method. To programmatically add numpy/pandas data.
+    - Code example here
+
+        ```python
+        my_table.add_rows(df)
+        ```
+
+45. [Secret management in Streamlit](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/secrets-management)
+
+46. Media elements
+    - `st.image`
+    - `st.video`
+    - `st.audio`
+    - Can also take raw data from a file, `numpy` data you generated, file names or an URL. All 3 methods above can take in these things.
+
+47. Input elements. They share these in common:
+    - Add little tool tip to your widget using `help` argument
+    - Disable any widget using `disabled` argument
+
+        ```python
+        st.<elem>(
+            "Hello world,
+            disabled=True
+        )
+        ```
+
+    - **Key argument** is the widget's **identity**, by default it's the widget's label, which is why if you have multiple widgets named "Click me!", Streamlit cannot differentiate between those two. Make sure to add unique identifiers to your widget(s) using the key argument.
+
+        ```python
+        [
+            st.button(
+                "Click me!",
+                key=f"id{i}"
+            )
+
+            for i in range(5)
+        ]
+        ```
+
+    - [Read more here](https://docs.streamlit.io/develop/concepts/architecture/widget-behavior)
+
+48. [Select Box](https://youtu.be/vIQQR_yq-8I?t=554) - poor man's multipage app. This one is pretty useful so check it out.
+
+49. `st.number_input` - dedicated widget for numbers, with min and max values, and step size.
+
+50. `st.date_input` - dedicated widget for dates, with min and max values, can include default tuple value for time period.
+
+51. File uploader - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
+    - Returned result is of type `UplodadedFile`
+    - Can get `getvalue` to get contents as byte array
+    - Or can read as file (`pd.read_csv`, or anything that accepts a file as argument).
+
+52. [Download button](https://youtu.be/vIQQR_yq-8I?t=716)
+
+53. [Session State](https://youtu.be/nnmBdpvN6u8?t=81)
+
+54. [st.empty()](https://youtu.be/nnmBdpvN6u8?t=345)
+
+55. Nicer looking components with [hydralit_components](https://github.com/TangleSpace/hydralit_components) - [Watch more here to learn about how to add external components to columns](https://youtu.be/nnmBdpvN6u8?t=381)
+
+56. [Set page config](https://youtu.be/nnmBdpvN6u8?t=432) - put `st.set_page_config` at beginning of `__main__`.
+
+57. st.info, st.success, st.warning, st.error
+
+58. [st.exception(e)](https://youtu.be/nnmBdpvN6u8?t=468)
+
+59. Any code inside context manager is going to show the spinner while it is running, good way to show user app is running, no problem! [st.spinner](https://youtu.be/nnmBdpvN6u8?t=476)
+
+60. `st.progress` - show progress bar (can edit at any point in the app)
+
+61. [`st.stop`](https://youtu.be/nnmBdpvN6u8?t=496) - literally stops the app, use to stop the app if user did not complete all of the info or something in an input widget.
+
+62. `st.rerun` - [video here](https://youtu.be/nnmBdpvN6u8?t=507), use for advanced situations, like when you want to rerun streamlit periodically to collect data and then display the new values, real-time system (kinda)
+
+63. `st.echo` - echo displays the code/results in the app.
+
+64. `st.help` - show the help of a method that we don't know.
