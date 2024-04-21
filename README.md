@@ -6,6 +6,6 @@
 
     For SQL version of the methods below, [see here](https://github.com/andfanilo/social-media-tutorials/blob/master/20230816-stdashboard/streamlit_app.py). Also useful to learn about financial data analysis and the differences between **actuals**, **budgets**, and **forecasts**.
 
-2. [Next Biggest Changes](./next-biggest-changes/)
+2. [Useful Features](./useful-features/)
 
-    A collection of useful code samples/information about the next biggest changes in [Streamlit](https://docs.streamlit.io/).
+    A collection of code samples/information about useful features [Streamlit](https://docs.streamlit.io/).

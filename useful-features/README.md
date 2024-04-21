@@ -1,4 +1,4 @@
-# Streamlit's Next Biggest Changes
+# Useful Streamlit Features
 
 ## Table of Contents
 
