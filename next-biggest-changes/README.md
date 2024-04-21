@@ -40,6 +40,7 @@
 35. `Trubrics` - a component that adds a upvote/downvote button near the chat input, allows us to collect user feedback on generated responses with thumbs up/down, which can then be stored Trubrics cloud thru their API for later analysis.
 36. Streamlit Creators Program - VIP team of people who made big contributions to the community. Other ways to contribute include becoming a streamlit advocate by regularly producing content, student ambassador, streamlit moderator to help maintain forum/discord server.
 37. Streamlit Hackathon - AssemblyAI for auto transcriptions, LangChain/Llama Index for chatbot orchestration, Weaviate for vector database, Clarifai for gen AI in the cloud. Each of these has a specific Streamlit tutorial integration!
+38. `st.rerun()` method to rerun the app. Useful for advanced use cases like when you need to rerun an app for each micro-batch of new data for pseudo real-time data processing. Use sparingly, read more about it [here](https://docs.streamlit.io/develop/api-reference/execution-flow/st.rerun) (when to use vs when not to use)
 
 ## Features
 
@@ -478,3 +479,59 @@
     - Clarifai for gen AI in the cloud
     - Each of these has a specific Streamlit tutorial integration!
     - Even deeper...LangChain agent callbacks being built purely for Streamlit! And LangChain memory and messages primitives will soon integrate with streamlit session state and chat elements.
+
+38. `st.rerun()` method to rerun the app. Useful for advanced use cases like when you need to rerun an app for each micro-batch of new data for pseudo real-time data processing.
+    - Code example of use-case
+
+        ```python
+        while True:
+            data = collect_data()
+            df = process_data()
+            visualize_data(df)
+            st.rerun()
+        ```
+
+    - Good article on when to use/when not to use `st.rerun`, be careful of excessive use of it. [Read here](https://docs.streamlit.io/develop/api-reference/execution-flow/st.rerun)
+
+    - With `st.rerun()`
+
+        ```python
+        import streamlit as st
+
+        if "value" not in st.session_state:
+            st.session_state.value = "Title"
+
+        ##### Option using st.rerun #####
+
+        st.header(st.session_state.value)
+
+        if st.button("Foo"):
+            st.session_state.value = "Foo"
+            st.rerun()
+        ```
+
+    - Using a callback to update an earlier header
+
+        ```python
+        ##### Option using a callback #####
+
+        st.header(st.session_state.value)
+
+        def update_value():
+            st.session_state.value = "Bar"
+
+        st.button("Bar", on_click=update_value)
+        ```
+
+    - Using containers to update an earlier header
+
+        ```python
+        ##### Option using a container #####
+
+        container = st.container()
+
+        if st.button("Baz"):
+            st.session_state.value = "Baz"
+
+        container.header(st.session_state.value)
+        ```
