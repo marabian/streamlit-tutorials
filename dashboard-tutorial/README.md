@@ -2,6 +2,8 @@
 
 A [Streamlit](https://docs.streamlit.io/) dashboard tutorial using [Plotly](https://plotly.com/python/) for creating data visualizations. Includes code samples for creating useful charts, as well as [Pandas](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) dataframe transformations like `pandas.melt()` (unpivot) for turning wide data into long data (useful for plotting). For SQL version of the methods below, [see here](https://github.com/andfanilo/social-media-tutorials/blob/master/20230816-stdashboard/streamlit_app.py). Also useful to learn about financial data analysis and the differences between **actuals**, **budgets**, and **forecasts**.
 
+Also here are some useful videos on using [line charts](https://www.youtube.com/watch?v=r8X9fmOPy_8&list=PLM8lYG2MzHmRpyrk9_j9FW0HiMwD9jSl5&index=6), [pie charts](https://www.youtube.com/watch?v=rxWkIn1EZnM&list=PLM8lYG2MzHmRpyrk9_j9FW0HiMwD9jSl5&index=7), and [tables](https://www.youtube.com/watch?v=CYi0pPWQ1Do&list=PLM8lYG2MzHmRpyrk9_j9FW0HiMwD9jSl5&index=8) in *Plotly*.
+
 ## Data
 
 ### Test Financial Data

@@ -70,7 +70,9 @@
 
 52. Download button for files - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
 
-53. Session state - [learn more here](https://youtu.be/vIQQR_yq-8I?t=677)
+53. **Session State**
+    - [Video 1](https://youtu.be/vIQQR_yq-8I?t=677)
+    - [Video 2](https://www.youtube.com/watch?v=5l9COMQ3acc&list=PLM8lYG2MzHmRpyrk9_j9FW0HiMwD9jSl5&index=9)
 
 54. `st.empty` - empty placeholder for layout purposes
 
@@ -281,6 +283,8 @@
             st.page_link("pages/vip.py", label="VIP customer", icon="🔒"
             st.page_link("pages/subscribe.py", label="Pay for it", icon="👀")
         ```
+
+    - [Watch video here](https://youtu.be/RW8b-lxCm_8?t=411)
 
 9. Can browse to new page using [`st.switch_page`](https://docs.streamlit.io/develop/api-reference/navigation/st.switch_page) method (v1.30)
     - Completely remove every page navigation from the app and just push the user to different pages yourself, depending on the context of the situation.
@@ -659,7 +663,7 @@
 
 52. [Download button](https://youtu.be/vIQQR_yq-8I?t=716)
 
-53. [Session State](https://youtu.be/nnmBdpvN6u8?t=81)
+53. **Session State** - [Video 1](https://youtu.be/nnmBdpvN6u8?t=81) and [Video 2](https://www.youtube.com/watch?v=5l9COMQ3acc&list=PLM8lYG2MzHmRpyrk9_j9FW0HiMwD9jSl5&index=9)
 
 54. [st.empty()](https://youtu.be/nnmBdpvN6u8?t=345)
 
@@ -673,12 +677,36 @@
 
 59. Any code inside context manager is going to show the spinner while it is running, good way to show user app is running, no problem! [st.spinner](https://youtu.be/nnmBdpvN6u8?t=476)
 
-60. `st.progress` - show progress bar (can edit at any point in the app)
+60. [`st.progress`](https://docs.streamlit.io/develop/api-reference/status/st.progress) - show progress bar (can edit at any point in the app)
 
-61. [`st.stop`](https://youtu.be/nnmBdpvN6u8?t=496) - literally stops the app, use to stop the app if user did not complete all of the info or something in an input widget.
+61. [`st.stop`](https://docs.streamlit.io/develop/api-reference/execution-flow/st.stop)
 
-62. `st.rerun` - [video here](https://youtu.be/nnmBdpvN6u8?t=507), use for advanced situations, like when you want to rerun streamlit periodically to collect data and then display the new values, real-time system (kinda)
+    - [Video here](https://youtu.be/nnmBdpvN6u8?t=496)
+    - Literally stops the app, use to stop the app if user did not complete all of the info or something in an input widget.
 
-63. `st.echo` - echo displays the code/results in the app.
+62. [`st.rerun`](https://docs.streamlit.io/develop/api-reference/execution-flow/st.rerun)
+    - [Video here](https://youtu.be/nnmBdpvN6u8?t=507)
+    - Use for advanced situations, like when you want to rerun streamlit periodically to collect data and then display the new values, real-time system (kinda)
 
-64. `st.help` - show the help of a method that we don't know.
+63. [`st.echo`](https://docs.streamlit.io/develop/api-reference/text/st.echo) - echo displays the code/results in the app.
+
+64. [`st.help`](https://docs.streamlit.io/develop/api-reference/utilities/st.help) - show the help of a method that we don't know.
+
+65. For debugging, display session state in sidebar
+    - Example code
+
+        ```python
+        with st.sidebar:
+            st.header("Debug")
+            st.write(st.session_state.to_dict())
+        ```
+
+    - Hide sidebar by default using `iniial_sidebar_state="collapsed"` in `st.set_page_config()`
+
+        ```python
+            st.set_page_config(
+                page_title="Wanderlust",
+                page_icon=":icon:",
+                layout="wide", initial_sidebar_state="collapsed",
+            )
+        ```
