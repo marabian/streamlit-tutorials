@@ -96,6 +96,10 @@
 
 64. `st.help` - displays help text for a function
 
+65. Display session state in side bar for debugging.
+
+66. Add checklist to app to remind yourself what to do
+
 ## Features
 
 1. Multiple [`st.chat_input()`](https://docs.streamlit.io/develop/api-reference/chat/st.chat_input) widgets (v1.31)
@@ -709,4 +713,15 @@
                 page_icon=":icon:",
                 layout="wide", initial_sidebar_state="collapsed",
             )
+        ```
+
+66. Add check list in the app to remind yourself what to do:
+
+    - Example code
+
+        ```python
+        with expander("Checklist"):
+            st.checkbox("Checklist item 1")
+            st.checkbox("Checklist item 2")
+            st.checkbox("Checklist item 3")
         ```

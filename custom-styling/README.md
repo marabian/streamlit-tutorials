@@ -3,6 +3,8 @@
 1. **Markdown Trick**
     - Code example
 
+        **Applying CSS**
+
         ```python
         st.markdown(
         """
@@ -15,6 +17,8 @@
         unsafe_allow_html=True
         )
         ```
+
+        **Applying HTML**
 
         ```python
         st.markdown(
@@ -54,6 +58,28 @@
 3. **Simpler Way to Style Widgets** - `st.stylable_container`
 
     - [See this](https://discuss.streamlit.io/t/button-css-for-streamlit/45888/9) for how to accomplish this without using the `st.stylable_container` context manager which comes with **streamlit-extras**.
+
+    - Basically: **The secret is in the new *CSS* `:has pseudo-class`, one can inject the Markdown span element with a key class in a `st.container()` and a CSS selector which only selects containers that contains a span with a certain key class.**
+
+    - `st.stylable_container` from [streamlit extras](https://extras.streamlit.app/) is a context manager that uses this trick in order to allow you to apply CSS styles to all its nested widgets.
+
+    - Example here
+
+        ```python
+        from streamlit_extras.stylable_container import stylable_container
+
+        with stylable_container(
+            key="cat_image",
+            css_styles="""
+            div[data-testid="stImage"] > img {
+                border-radius: 100px;
+            }
+            """,
+        ):
+            st.image("./cat.jpg")
+        
+        ```
+
     - Streamlit is a React web app which compiles to HTML/CSS/JS for your browser.
 
     - Any element element style is specified with its CSS.
@@ -132,7 +158,7 @@
     - Give the container a unique key (e.g. `cat_image`), then write down the CSS properties to a apply a border radius (e.g.) to any image tag directly under any div with the `stImage` *data-testid* attribute.
 
         ```html
-        <div data-testid="stImage"> class="dsgjdfgdf fds">
+        <div data-testid="stImage" class="dsgjdfgdf fds">
             <img src="https://localhost:8501/media/5rgdfg....jpg" alt="0">
         </div>
         ```
