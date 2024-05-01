@@ -9,3 +9,7 @@
 2. [Useful Features](./useful-features/)
 
     A collection of code samples/information about useful features [Streamlit](https://docs.streamlit.io/).
+
+3. [Custom Styling](./custom-styling/)
+
+   A collection of styling guides/tips for Streamlit.
